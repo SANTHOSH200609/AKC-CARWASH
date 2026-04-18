@@ -95,6 +95,10 @@ const Book = () => {
       message: `Your ${service.name_en} on ${date} at ${slot} is pending confirmation.`,
       booking_id: data.id,
     });
+    // Notify admin via SMS (fire-and-forget — don't block UX if it fails)
+    supabase.functions.invoke('notify-admin-booking', { body: { bookingId: data.id } }).catch((e) => {
+      console.error('Admin SMS notify failed', e);
+    });
     navigate(`/booking/${data.id}/confirmed`);
   };
 
