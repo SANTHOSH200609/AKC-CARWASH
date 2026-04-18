@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.verify-sms-otp]
 verify_jwt = false
+
+[functions.notify-admin-booking]
+verify_jwt = false
